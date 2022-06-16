@@ -20,4 +20,7 @@ git-commit:
 	git add .
 	git commit -m "$(title)"
 
-.PHONY: postgres createdb dropdb migrate-up migrate-down migrate-create git-commit
+sqlc:
+	sqlc generate
+
+.PHONY: postgres createdb dropdb migrate-up migrate-down migrate-create git-commit sqlc
