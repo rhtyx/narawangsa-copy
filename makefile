@@ -6,3 +6,9 @@ createdb:
 
 dropdb:
 	docker exec -it postgres14_narawangsa dropdb narawangsa_db
+
+migrate-up:
+	migrate -path db/migration -database "postgresql://narawangsa:narawangsa@localhost:5434/narawangsa_db?sslmode=disable" up
+
+migrate-down:
+	migrate -path db/migration -database "postgresql://narawangsa:narawangsa@localhost:5434/narawangsa_db?sslmode=disable" down
