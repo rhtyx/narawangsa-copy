@@ -15,3 +15,7 @@ migrate-down:
 
 migrate-create:
 	migrate create -ext sql -dir db/migration -seq $(name)
+
+git-commit:
+	git add .
+	git commit -m "$(title)"
