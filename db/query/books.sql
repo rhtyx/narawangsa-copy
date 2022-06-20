@@ -1,9 +1,9 @@
--- name: CreateBook :exec
+-- name: CreateBook :one
 INSERT INTO "books" (
   "title", "author", "year", "pages", "synopsis"
 ) VALUES (
   $1, $2, $3, $4, $5
-);
+) RETURNING "id";
 
 -- name: GetBook :one
 SELECT * FROM "books"
