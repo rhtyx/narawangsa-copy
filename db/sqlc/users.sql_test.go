@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"testing"
 	"time"
 
@@ -29,7 +30,10 @@ var argUpdateUser = UpdateUserParams{
 }
 
 func createUserF() {
-	_ = testQueries.CreateUser(context.Background(), argUser)
+	_, err := testQueries.CreateUser(context.Background(), argUser)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 func getUserF() GetUserRow {
@@ -38,8 +42,11 @@ func getUserF() GetUserRow {
 }
 
 func TestCreateUser(t *testing.T) {
-	err := testQueries.CreateUser(context.Background(), argUser)
+	id, err := testQueries.CreateUser(context.Background(), argUser)
 	require.NoError(t, err)
+
+	user, _ := testQueries.GetUser(context.Background(), argUser.Username)
+	require.Equal(t, user.ID, id)
 }
 
 func TestGetUser(t *testing.T) {
