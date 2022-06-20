@@ -25,7 +25,7 @@ var argBook2 = CreateBookParams{
 }
 
 func TestCreateBook(t *testing.T) {
-	err := testQueries.CreateBook(context.Background(), argBook1)
+	_, err := testQueries.CreateBook(context.Background(), argBook1)
 	require.NoError(t, err)
 }
 

@@ -10,12 +10,12 @@ import (
 	"time"
 )
 
-const createBook = `-- name: CreateBook :exec
+const createBook = `-- name: CreateBook :one
 INSERT INTO "books" (
   "title", "author", "year", "pages", "synopsis"
 ) VALUES (
   $1, $2, $3, $4, $5
-)
+) RETURNING "id"
 `
 
 type CreateBookParams struct {
@@ -26,15 +26,17 @@ type CreateBookParams struct {
 	Synopsis string `json:"synopsis"`
 }
 
-func (q *Queries) CreateBook(ctx context.Context, arg CreateBookParams) error {
-	_, err := q.db.ExecContext(ctx, createBook,
+func (q *Queries) CreateBook(ctx context.Context, arg CreateBookParams) (int64, error) {
+	row := q.db.QueryRowContext(ctx, createBook,
 		arg.Title,
 		arg.Author,
 		arg.Year,
 		arg.Pages,
 		arg.Synopsis,
 	)
-	return err
+	var id int64
+	err := row.Scan(&id)
+	return id, err
 }
 
 const deleteBook = `-- name: DeleteBook :exec
