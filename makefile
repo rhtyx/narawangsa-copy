@@ -23,6 +23,9 @@ git-commit:
 git-push:
 	git push origin master
 
+test:
+	go test -v -cover ./...
+
 sqlc:
 	sqlc generate
 
