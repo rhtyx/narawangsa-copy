@@ -16,11 +16,11 @@ migrate-down:
 migrate-create:
 	migrate create -ext sql -dir db/migration -seq $(name)
 
-git-commit:
+commit:
 	git add .
 	git commit -m "$(title)"
 
-git-push:
+push:
 	git push origin master
 
 test:

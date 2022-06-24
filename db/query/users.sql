@@ -6,7 +6,7 @@ INSERT INTO "users" (
 ) RETURNING "id";
 
 -- name: GetUser :one
-SELECT "id", "name", "username", "email" FROM "users" 
+SELECT * FROM "users" 
 WHERE "username" = $1;
 
 -- name: UpdateUser :one

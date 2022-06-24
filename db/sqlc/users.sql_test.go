@@ -36,7 +36,7 @@ func createUserF() {
 	}
 }
 
-func getUserF() GetUserRow {
+func getUserF() User {
 	user, _ := testQueries.GetUser(context.Background(), argUser.Username)
 	return user
 }
